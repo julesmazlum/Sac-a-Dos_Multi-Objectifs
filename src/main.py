@@ -8,7 +8,7 @@ if __name__ == "__main__":
     # Phase 1 : Pareto
     points_pareto = programmation_dynamique(mes_objets, W)
     
-    # Phase 2 : Lorenz [cite: 20]
+    # Phase 2 : Lorenz
     points_lorenz = filtre_lorenz(points_pareto)
     
     print(f"\nNombre de points Pareto : {len(points_pareto)}")
