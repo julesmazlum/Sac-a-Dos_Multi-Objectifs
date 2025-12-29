@@ -43,6 +43,8 @@ def est_domine(v_a, v_b):
             
     return meilleur_partout and strictement_meilleur
 
+"""
+# Ancienne version de filtre_pareto (moins efficace)
 def filtre_pareto(liste_vecteurs):
     solutions_propres = []
     
@@ -58,6 +60,34 @@ def filtre_pareto(liste_vecteurs):
             solutions_propres.append(v_a)
                 
     return solutions_propres
+"""
+
+def filtre_pareto(points):
+    if not points: 
+        return []
+
+    # Supprimer les doublons 
+    points = list(set(points))
+    n = len(points)
+    if n <= 1: 
+        return points
+    
+    garder = [True] * n
+    for i in range(n):
+        if not garder[i]: 
+            continue
+        for j in range(n):
+            if i == j or not garder[j]: 
+                continue
+            # Si j est dominé par i, on l'élimine
+            if est_domine(points[j], points[i]):
+                garder[j] = False
+            # Si i est dominé par j, on élimine i et on arrête pour i
+            elif est_domine(points[i], points[j]):
+                garder[i] = False
+                break
+                
+    return [points[i] for i in range(n) if garder[i]]
 
 def calcul_lorenz(vecteur):
     v_trie = sorted(list(vecteur))

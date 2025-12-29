@@ -4,6 +4,8 @@ from programmation_dynamique import programmation_dynamique, filtre_lorenz
 if __name__ == "__main__":
     mes_objets = read_data('../data/2KP200-TA-0.dat', nb_objets_max=20, nb_objectifs=3)
     W = sum(i['w'] for i in mes_objets) // 2
+
+    #---------------------Programmation Dynamique ---------------------#
     
     # Phase 1 : Pareto
     points_pareto = programmation_dynamique(mes_objets, W)
