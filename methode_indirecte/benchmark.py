@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 def run_benchmarks():
     fichier_data = '../data/2KP200-TA-0.dat'
-    fichier_res = '../sol/PD/resultats_bruts.csv'
+    fichier_res = './results/resultats_bruts.csv'
     
     # Préparer le fichier CSV
     if not os.path.exists(fichier_res):
@@ -54,7 +54,7 @@ def run_benchmarks():
             break # On arrête pour ce p si la mémoire sature
 
 def generate_plots():
-    df = pd.read_csv('../sol/PD/resultats_bruts.csv')
+    df = pd.read_csv('./results/resultats_bruts.csv')
 
     # Graphique des temps de calcul
     plt.figure(figsize=(10, 5))
@@ -68,7 +68,7 @@ def generate_plots():
     plt.ylabel("Temps (secondes)")
     plt.legend()
     plt.grid(True, which="both", ls="-")
-    plt.savefig('../sol/PD/graph_temps.png')
+    plt.savefig('./results/graph_temps.png')
     plt.show()
 
     # Graphique du nombre de points
@@ -87,7 +87,7 @@ def generate_plots():
     plt.ylabel("Nombre de points")
     plt.legend()
     plt.grid(True)
-    plt.savefig('../sol/PD/graph_points.png')
+    plt.savefig('./results/graph_points.png')
     plt.show()
 
 def plot_2d_space():
@@ -108,12 +108,15 @@ def plot_2d_space():
     plt.xlabel("Objectif 1")
     plt.ylabel("Objectif 2")
     plt.legend()
-    plt.savefig('../sol/PD/visualisation_2d.png')
+    plt.savefig('./results/visualisation_2d.png')
     plt.show()
 
 if __name__ == "__main__":
+    # Benchmark
     #run_benchmarks()
-    generate_plots()
+    #generate_plots()
+
+    # Solution 2D
     #plot_2d_space()
 
     

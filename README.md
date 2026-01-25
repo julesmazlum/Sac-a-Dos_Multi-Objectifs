@@ -42,21 +42,21 @@ Dans ce projet, deux approches sont étudiées :
 ## Structure du projet
 
 ```text
-├── data/                    # Fichiers d’instances
-├── sol/PD/                  # Résultats et solutions
+├── data/                           # Fichiers d’instances
 
-├── methode_directe/         # Implémentation de la méthode directe
-│   ├── results/             # Résultats générés (CSV, graphiques, etc.)
-│   ├── load.py              # Chargement des données et gestion des instances
-│   ├── main.py              # Script principal pour exécuter la méthode directe
-│   ├── model.py             # Modèles d’optimisation (P1, PL, méthode directe)
-│   └── ut.py                # Expérimentations et analyse des résultats
+├── methode_directe/                # Implémentation de la méthode directe
+│   ├── results/                    # Résultats générés (CSV, graphiques, etc.)
+│   ├── load.py                     # Chargement des données et gestion des instances
+│   ├── main.py                     # Script principal pour exécuter la méthode directe
+│   ├── model.py                    # Modèles d’optimisation (P1, PL, méthode directe)
+│   └── ut.py                       # Expérimentations et analyse des résultats
 
-├── src/                     # Code source (autres méthodes / versions)
-│   ├── load.py              # Chargement des données
-│   ├── model.py             # Modèles d’optimisation
-│   ├── ut.py                # Expérimentations
-│   └── main.py              # Point d’entrée du programme
+├── methode_indirecte/              # Code source (autres méthodes / versions)
+│   ├── results/                    # Résultats générés (CSV, graphiques, etc.)
+│   ├── benchmark.py                # Expérimentations
+│   ├── main.py                     # Script principal pour exécuter la méthode indirecte
+│   ├── programmation_indirecte.py  # Les algorithmes de la méthode indirecte
+│   ├── utils.py                    # Fonctions utiles (lectures, comparaison, pareto..)
 
 └── README.md
 ```
@@ -70,6 +70,24 @@ python main.py
 ```
 
 Les résultats (temps de calcul, solutions, graphiques) sont générés dans le dossier results/.
+
+## Exécution de la méthode indirecte
+
+Pour exécuter la méthode indirecte, se placer dans le dossier **`methode_indirecte`** et lancer :
+
+```bash
+python main.py
+```
+
+Pour un exemple de résolution sur petite instance.
+
+Et 
+
+```bash
+python benchmark.py
+```
+
+Pour pouvoir obtenir des résultats numériques et pouvoir tracer les graphiques.
 
 ## Dépendances
 
