@@ -1,97 +1,79 @@
 # Sac à dos multi-objectifs — Dominance de Lorenz
 
-Projet académique portant sur la résolution du **problème du sac à dos multi-objectifs** en utilisant la **dominance de Lorenz** afin d’identifier des solutions équilibrées entre plusieurs critères.  
-Réalisé dans le cadre du module **MADMC – Master 2**.
+Projet M2 AI2D 2025-2026 — UE Modèles et Algorithmes pour la Décision Multicritères et Collective (MADMC), Sorbonne Université. Auteurs : Jules MAZLUM, Camélia BOUALI.
 
----
+## Description / Sujet
 
-## Contributeurs
-- Jules Mazlum  
-- Camélia Bouali  
+Le problème du sac à dos multi-objectifs consiste à sélectionner un sous-ensemble d'objets sous contrainte de capacité tout en optimisant simultanément plusieurs critères (profits multiples). Ce projet le résout en utilisant la **dominance de Lorenz** afin d'identifier des solutions équilibrées entre plusieurs critères.
 
----
+Deux approches sont étudiées :
 
-## Description
-
-Le problème du sac à dos multi-objectifs consiste à sélectionner un sous-ensemble d’objets sous contrainte de capacité tout en optimisant simultanément plusieurs critères (profits multiples).
-
-Dans ce projet, deux approches sont étudiées :
-- **Méthode indirecte** : génération de l’ensemble des solutions Pareto non dominées, puis filtrage selon la dominance de Lorenz.
-- **Méthode directe** : génération directe des solutions Lorenz non dominées par l’optimisation répétée d’une fonction d’agrégation **OWA (Ordered Weighted Averaging)**.
-
-## Méthodes implémentées
-
-### Méthode indirecte (Pareto + Lorenz)
-- Programmation dynamique pour générer l’ensemble des solutions Pareto non dominées.
+**Méthode indirecte (Pareto + Lorenz)**
+- Programmation dynamique pour générer l'ensemble des solutions Pareto non dominées.
 - Filtrage global des solutions selon la dominance de Lorenz.
 - Analyse du nombre de solutions Pareto vs Lorenz.
 
-### Méthode directe (OWA)
-- Optimisation d’une fonction d’agrégation OWA compatible avec la dominance de Lorenz.
+**Méthode directe (OWA)**
+- Optimisation d'une fonction d'agrégation OWA (Ordered Weighted Averaging) compatible avec la dominance de Lorenz.
 - Linéarisation du modèle en programme linéaire en nombres entiers (PLNE).
-- Génération itérative des vecteurs de Lorenz non dominés jusqu’à infaisabilité du modèle.
+- Génération itérative des vecteurs de Lorenz non dominés jusqu'à infaisabilité du modèle.
 
-### Analyse expérimentale
-- Étude de l’influence du nombre d’objets `n` et du nombre d’objectifs `p`.
-- Comparaison des temps de calcul entre les deux méthodes.
-- Analyse de la volumétrie des solutions.
-- Étude de l’influence des poids OWA.
-
----
-
-## Structure du projet
+## Structure du dépôt
 
 ```text
-├── data/                           # Fichiers d’instances
-
-├── methode_directe/                # Implémentation de la méthode directe
-│   ├── results/                    # Résultats générés (CSV, graphiques, etc.)
-│   ├── load.py                     # Chargement des données et gestion des instances
-│   ├── main.py                     # Script principal pour exécuter la méthode directe
-│   ├── model.py                    # Modèles d’optimisation (P1, PL, méthode directe)
-│   └── ut.py                       # Expérimentations et analyse des résultats
-
-├── methode_indirecte/              # Code source (autres méthodes / versions)
-│   ├── results/                    # Résultats générés (CSV, graphiques, etc.)
-│   ├── benchmark.py                # Expérimentations
-│   ├── main.py                     # Script principal pour exécuter la méthode indirecte
-│   ├── programmation_indirecte.py  # Les algorithmes de la méthode indirecte
-│   ├── utils.py                    # Fonctions utiles (lectures, comparaison, pareto..)
-
-└── README.md
+.
+├── data/                           Fichiers d'instances
+├── methode_directe/                Implémentation de la méthode directe
+│   ├── results/                    Résultats générés (CSV, graphiques, etc.)
+│   ├── load.py                     Chargement des données et gestion des instances
+│   ├── main.py                     Script principal pour exécuter la méthode directe
+│   ├── model.py                    Modèles d'optimisation (P1, PL, méthode directe)
+│   └── ut.py                       Expérimentations et analyse des résultats
+├── methode_indirecte/              Implémentation de la méthode indirecte
+│   ├── results/                    Résultats générés (CSV, graphiques, etc.)
+│   ├── benchmark.py                Expérimentations
+│   ├── main.py                     Script principal pour exécuter la méthode indirecte
+│   ├── programmation_indirecte.py  Algorithmes de la méthode indirecte
+│   └── utils.py                    Fonctions utiles (lecture, comparaison, Pareto...)
+├── Projet_MADMC_MAZLUM-BOUALI.pdf  Rapport du projet
+└── projetMADMC.pdf                 Énoncé du sujet
 ```
 
-## Exécution de la méthode directe
+## Installation / Prérequis
 
-Pour exécuter la méthode directe, se placer dans le dossier **`methode_directe`** et lancer :
+Python 3.x et le solveur Gurobi.
+
+```bash
+pip install gurobipy numpy matplotlib
+```
+
+## Utilisation
+
+**Méthode directe**, depuis `methode_directe/` :
 
 ```bash
 python main.py
 ```
 
-Les résultats (temps de calcul, solutions, graphiques) sont générés dans le dossier results/.
-
-## Exécution de la méthode indirecte
-
-Pour exécuter la méthode indirecte, se placer dans le dossier **`methode_indirecte`** et lancer :
+**Méthode indirecte**, depuis `methode_indirecte/` :
 
 ```bash
-python main.py
+python main.py       # exemple de résolution sur petite instance
+python benchmark.py  # résultats numériques et graphiques
 ```
 
-Pour un exemple de résolution sur petite instance.
+Les résultats (temps de calcul, solutions, graphiques) sont générés dans le dossier `results/` de chaque méthode.
 
-Et 
+## Résultats principaux
 
-```bash
-python benchmark.py
-```
+- Étude de l'influence du nombre d'objets `n` et du nombre d'objectifs `p` sur les deux méthodes.
+- Comparaison des temps de calcul entre méthode directe et méthode indirecte.
+- Analyse de la volumétrie des solutions (nombre de solutions Pareto vs Lorenz non dominées).
+- Étude de l'influence des poids OWA sur la méthode directe.
 
-Pour pouvoir obtenir des résultats numériques et pouvoir tracer les graphiques.
+Le détail est disponible dans le rapport `Projet_MADMC_MAZLUM-BOUALI.pdf`.
 
-## Dépendances
+## Auteurs
 
-- Python 3.x
-- Gurobi (gurobipy)
-- NumPy
-- Matplotlib (pour les graphiques)
+- Jules MAZLUM
+- Camélia BOUALI
